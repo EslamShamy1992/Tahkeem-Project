@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-// test.describe("all tests", () => {
+test.describe("all tests", () => {
   
 //   test.beforeEach(async ({ page }) => {
 //     await page.goto("/");
@@ -12,6 +12,7 @@ import { expect, test } from "@playwright/test";
 
   test.only("login with valid Credentials", async ({ page }) => {
    
+     //  await page.pause()
     await expect(page).toHaveURL('https://qacart.com/')
     //  await page.locator('[id="submit"]').nth[0].click()
     // await page.waitForTimeout(3000)
@@ -25,4 +26,4 @@ import { expect, test } from "@playwright/test";
 //     const title =await page.title();
 //     await expect(page).toHaveTitle(title,{timeout:60000})
 
-// });
+});
