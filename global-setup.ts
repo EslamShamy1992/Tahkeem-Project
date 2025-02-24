@@ -7,12 +7,27 @@ export default async function globalSetup() {
   await page.locator("#menuItem_1634680565427_1193").click();
   await page.getByRole("textbox", { name: "البريد الإلكتروني" }).fill("eslam_shamy@hotmail.com");
   await page.getByRole("textbox", { name: "كلمة المرور" }).fill("12345Sport@");
+  // Save the authentication state (cookies, localStorage, etc.)
+  await page.context().storageState({ path: 'admin.json' });
+
+
+  // example for new role normal user 
+  const page1 = await browser.newPage();
+  await page1.goto("https://qacart.com/");
+  await page1.locator("#menuItem_1634680565427_1193").click();
+  await page1.getByRole("textbox", { name: "البريد الإلكتروني" }).fill("user@hotmail.com");
+  await page1.getByRole("textbox", { name: "كلمة المرور" }).fill("12345Sport@");
  
   // Save the authentication state (cookies, localStorage, etc.)
-  await page.context().storageState({ path: 'storageState.json' });
+  await page1.context().storageState({ path: 'user.json' });
 
-  await browser.close();
+
 }
+
+
+
+
+
 // 2. Create the Global Setup File
 // Your global setup file will log in and save the session state. Here's how you can structure your global-setup.ts file.
 

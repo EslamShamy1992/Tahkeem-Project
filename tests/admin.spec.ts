@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-// test.describe("all tests", () => {
+test.describe("all tests", () => {
   
-  test.use({storageState:"user.json"})
+  test.use({storageState:"admin.json"})
 
 //   test.beforeEach(async ({ page }) => {
 
@@ -10,9 +10,8 @@ import { expect, test } from "@playwright/test";
 
 //   });
 
-  test("login with user", async ({ page }) => {
+  test("login with admin", async ({ page }) => {
    
-     //  await page.pause()
     const baseurl=  page.url();
     await expect(page).toHaveURL(baseurl)
     //  await page.locator('[id="submit"]').nth[0].click()
@@ -24,4 +23,4 @@ import { expect, test } from "@playwright/test";
 
 
 
-// });
+});
