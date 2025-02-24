@@ -1,0 +1,44 @@
+{
+  "cookies": [
+    {
+      "name": "slim_session",
+      "value": "yzHbPDcltAWe5sq6B3CF1WdXvM7z23XLLuWD7V1r",
+      "domain": "qacart.com",
+      "path": "/",
+      "expires": 1740618873.907704,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "test_cookie",
+      "value": "CheckForPermission",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1740403773.976675,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://qacart.com",
+      "localStorage": [
+        {
+          "name": "anonymous_token",
+          "value": "{\"token\":\"67bc70b8435a1c76d1f4anon\",\"lastAccessed\":1740402873760}"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.google.com",
+      "localStorage": [
+        {
+          "name": "rc::a",
+          "value": "MWU0YmFzenBlZHpucg=="
+        }
+      ]
+    }
+  ]
+}
