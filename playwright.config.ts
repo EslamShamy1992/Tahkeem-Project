@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  globalSetup: './global-setup.ts',
+  // globalSetup: './global-setup.ts',
 
   // timeout:60 * 1000,
   
@@ -31,10 +31,10 @@ export default defineConfig({
   use: {
 
   
-   
-   
+    headless:false,
+    
     /* Base URL to use in actions like `await page.goto('/')`. */
-      // baseURL: 'https://qacart.com',
+       baseURL: 'https://tahkeem.dev.is.sa',
       // storageState: 'storageState.json',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
@@ -47,7 +47,8 @@ export default defineConfig({
       
       name: 'chromium',
       use: {  
-        headless:false,
+      
+       
         ...devices['Desktop Chrome'] },
     },
 

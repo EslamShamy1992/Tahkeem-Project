@@ -13,7 +13,7 @@ export default async function globalSetup() {
 
   // example for new role normal user 
   const page1 = await browser.newPage();
-  await page1.goto("https://qacart.com/");
+  await page1.goto("https://www.google.com/es");
   await page1.locator("#menuItem_1634680565427_1193").click();
   await page1.getByRole("textbox", { name: "البريد الإلكتروني" }).fill("user@hotmail.com");
   await page1.getByRole("textbox", { name: "كلمة المرور" }).fill("12345Sport@");

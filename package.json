@@ -86,6 +86,7 @@
     "yocto-queue": "^0.1.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.5.1",
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.5",
     "mocha": "^11.1.0"
