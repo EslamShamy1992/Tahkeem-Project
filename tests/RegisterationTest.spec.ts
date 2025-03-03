@@ -18,7 +18,7 @@ test.describe("all tests", () => {
     await page.goto("/");
   });
 
-  test.only("RegisterAsarbitrator", async ({ page }) => {
+  test("RegisterAsarbitrator", async ({ page }) => {
     await landingpage.goToRegisterPage()
     await registerpage.RegisterAsArbitrator(
       faker.internet.email(),
