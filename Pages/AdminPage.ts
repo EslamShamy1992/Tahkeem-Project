@@ -1,51 +1,51 @@
-import { Page, Locator } from "@playwright/test";
+import { Page,Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { promises } from "dns";
-
-export  class AdminPage extends BasePage{
-    private member: Locator;
-    private submitButton: Locator;
-    private arbitrator:Locator;
-    private email:Locator;
-    private phone:Locator;
-    private Logo:Locator;
-
-    constructor(page:Page){
-        super(page)
 
 
-        this.member= page.locator('#mat-radio-3')
-        this.submitButton= page.locator('//button[@type="submit"]')
-        this.arbitrator= page.locator('#mat-mdc-checkbox-1')
-        this.email= page.locator('//input[@type="email"]')
-        this.phone= page.getByRole('textbox', { name: 'رقم الجوال' })
-        this.Logo= page.getByRole('heading', { name: 'تأكيد رقم الجوال' })
 
-    }
+export class AdminPage extends BasePage{
 
-    async RegisterAsArbitrator(Email:string,Phone:string):Promise<void>{
-
-        await this.member.click()
-        await this.submitButton.click()
-        await this.arbitrator.click()
-        await this.submitButton.click()
-        await this.email.fill(Email)
-        await this.phone.fill(Phone)
-        await this.submitButton.click()
-
-    }
-
-    async LogoIsVisible():Promise<boolean>{
-        return this.Logo.isVisible()
-
-    }
+  
+    private addAdminButton: Locator;
+    private fullNameInput: Locator;
+    private emailInput: Locator;
+    private roleDropdown: Locator;
+    private adminRoleOption: Locator;
+    private contentManagerRoleOption: Locator;
+    private saveButton: Locator;
+    private confirmationmessage:Locator;
     
-
-
-
-
-
-
-
+ 
+     constructor(page:Page){
+         super(page)
+ 
+         this.addAdminButton = page.getByRole('button', { name: 'إضافة مشرف' }).nth(0);
+        this.fullNameInput = page.getByRole('textbox', { name: 'اسم المشرف بالكامل' });
+        this.emailInput = page.getByRole('textbox', { name: 'البريد الإلكتروني' });
+        this.roleDropdown = page.locator('nz-select-top-control'); 
+        this.adminRoleOption = page.getByText('المسؤول الإداري');
+        this.contentManagerRoleOption = page.getByText('مدير المحتوى');
+        this.saveButton = page.getByRole('button', { name: 'حفظ' });
+        this.confirmationmessage= page.getByRole('heading', { name: 'تم إضافة المشرف بنجاح' })
     
-}
+        
+     }
+
+     async addAdmin(fullName, email) {
+        await this.addAdminButton.click();
+        await this.fullNameInput.fill(fullName);
+        await this.emailInput.fill(email);
+        await this.roleDropdown.click()
+        await this.adminRoleOption.click()
+        await this.saveButton.click()
+    }
+
+
+
+    async confirmationmessageIsDisplayed(){
+
+        return await this.confirmationmessage.isVisible()
+    }
+
+
+     }
