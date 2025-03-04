@@ -64,7 +64,7 @@ test("verify search by Admin Email", async ({ page }) => {
   await adminpage.verifyEmailInResults(adminEmail);
 });
 
-test.only("verify disable admin account", async ({page}) => {
+test("verify disable admin account", async ({page}) => {
   await landingpage.goToLoginPage();
   await loginpage.loginAsAdmin(email, password);
   await homepage.navigateToManageAdminPage();
