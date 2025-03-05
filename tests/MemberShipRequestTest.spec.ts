@@ -14,7 +14,7 @@ let familynameAr: string;
 let password:string;
 
 
-test.describe("Registration TestCases", () => {
+test.describe("MemberShip Request TestCases", () => {
   function generateRandomNumbers(num): string {
     const prefix = "4";
     const randomNumber = faker.string.numeric(num);
@@ -33,24 +33,21 @@ test.describe("Registration TestCases", () => {
     await page.goto("/");
   });
 
+  test.only("Submit MemberShip Application Form",async({page})=>{
+     await landingpage.goToRegisterPage();
+        await registerpage.RegisterAsArbitrator(faker.internet.email(), generateRandomNumbers(7),
+          generateRandomNumbers(5)
+        );
+        await registerpage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);
+        await registerpage.fillEnglishNames(faker.person.firstName(), faker.person.firstName(), faker.person.firstName(), faker.person.lastName());
+        await registerpage.setPassword(password);
+        await registerpage.confirmPasswordMatch(password);
+        
+        await membershiprequestpage.fillMembershipRequestForm(generateRandomNumbers(9),'date from to.png',faker.location.streetAddress(),
+        faker.location.zipCode(),'ألبانيا','الجزائر');
+        await membershiprequestpage.clickNextButton();
+        expect(membershiprequestpage.VerifyStep2TitleIsDisplayed).toBeTruthy()
+      
 
-
-  
-  test("RegisterAsMember", async ({ page }) => {
-    await landingpage.goToRegisterPage();
-    await registerpage.RegisterAsArbitrator(faker.internet.email(), generateRandomNumbers(7),
-      generateRandomNumbers(5)
-    );
-    await registerpage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);
-    await registerpage.fillEnglishNames(faker.person.firstName(), faker.person.firstName(), faker.person.firstName(), faker.person.lastName());
-    await registerpage.setPassword(password);
-    await registerpage.confirmPasswordMatch(password);
-    expect(membershiprequestpage.VerifymemberShipRequestTitleIsDisplayed).toBeTruthy()
-    
-  });
-
-
-
-
-
+  })
 });

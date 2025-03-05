@@ -12,6 +12,9 @@ let adminpage: AdminPage;
 let email = "admin@tahkeem.com";
 let password = "Changeme@123";
 
+
+
+test.describe("Admin TestCases", () => {
 test.beforeEach(async ({ page }) => {
   landingpage = new LandingPage(page);
   loginpage = new LoginPage(page);
@@ -72,4 +75,5 @@ test("verify disable admin account", async ({page}) => {
 expect(adminpage.confirmationmessageIsDisplayed).toBeTruthy()
  
   
+});
 });
