@@ -33,6 +33,9 @@ test.describe("MemberShip Request TestCases", () => {
     await page.goto("/");
   });
 
+
+
+
   test.only("Submit MemberShip Application Form",async({page})=>{
      await landingpage.goToRegisterPage();
         await registerpage.RegisterAsArbitrator(faker.internet.email(), generateRandomNumbers(7),
@@ -42,11 +45,12 @@ test.describe("MemberShip Request TestCases", () => {
         await registerpage.fillEnglishNames(faker.person.firstName(), faker.person.firstName(), faker.person.firstName(), faker.person.lastName());
         await registerpage.setPassword(password);
         await registerpage.confirmPasswordMatch(password);
-        
-        await membershiprequestpage.fillMembershipRequestForm(generateRandomNumbers(9),'date from to.png',faker.location.streetAddress(),
+        await membershiprequestpage.fillMembershipRequestForm1(generateRandomNumbers(9),'date from to.png',faker.location.streetAddress(),
         faker.location.zipCode(),'ألبانيا','الجزائر');
         await membershiprequestpage.clickNextButton();
         expect(membershiprequestpage.VerifyStep2TitleIsDisplayed).toBeTruthy()
+        await membershiprequestpage.fillmembershipForm2('date from to.png')
+        expect(landingpage.LandingpageTitleIsDisplayed).toBeTruthy()
       
 
   })
