@@ -12,6 +12,7 @@ let fathernameAr: string;
 let grandfathernameAr: string;
 let familynameAr: string;
 let password:string;
+let fakeemail:string;
 
 
 test.describe("Registration TestCases", () => {
@@ -30,6 +31,7 @@ test.describe("Registration TestCases", () => {
      grandfathernameAr= "محمد";
     familynameAr= "الشامى";
     password='Eslam1992@';
+    fakeemail=faker.internet.email()
     await page.goto("/");
   });
 
@@ -38,7 +40,7 @@ test.describe("Registration TestCases", () => {
   
   test("RegisterAsMember", async ({ page }) => {
     await landingpage.goToRegisterPage();
-    await registerpage.RegisterAsArbitrator(faker.internet.email(), generateRandomNumbers(7),
+    await registerpage.RegisterAsMember(fakeemail, generateRandomNumbers(7),
       generateRandomNumbers(5)
     );
     await registerpage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);
@@ -46,8 +48,24 @@ test.describe("Registration TestCases", () => {
     await registerpage.setPassword(password);
     await registerpage.confirmPasswordMatch(password);
     expect(membershiprequestpage.VerifymemberShipRequestTitleIsDisplayed).toBeTruthy()
+    console.log(fakeemail)
     
   });
+
+  test.only("Register as Service Seeker",async({page})=>{
+    await landingpage.goToRegisterPage()
+    await registerpage.RegisterAsServiceSeeker(fakeemail, generateRandomNumbers(7),
+    generateRandomNumbers(5));
+    await registerpage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);
+    await registerpage.fillEnglishNames(faker.person.firstName(), faker.person.firstName(), faker.person.firstName(), faker.person.lastName());
+
+    await registerpage.setPassword(password);
+    await registerpage.confirmPasswordMatch(password);
+    await expect(membershiprequestpage.VerifymemberShipRequestTitleIsDisplayed).toBeTruthy()
+    console.log(fakeemail)
+
+
+  })
 
 
 

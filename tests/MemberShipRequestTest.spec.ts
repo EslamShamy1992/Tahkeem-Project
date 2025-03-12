@@ -12,6 +12,8 @@ let fathernameAr: string;
 let grandfathernameAr: string;
 let familynameAr: string;
 let password:string;
+let fakeemail:string;
+
 
 
 test.describe("MemberShip Request TestCases", () => {
@@ -30,15 +32,17 @@ test.describe("MemberShip Request TestCases", () => {
      grandfathernameAr= "محمد";
     familynameAr= "الشامى";
     password='Eslam1992@';
+    fakeemail=faker.internet.email()
+    
     await page.goto("/");
   });
 
 
 
 
-  test.only("Submit MemberShip Application Form",async({page})=>{
+  test("Submit MemberShip Application Form",async({page})=>{
      await landingpage.goToRegisterPage();
-        await registerpage.RegisterAsArbitrator(faker.internet.email(), generateRandomNumbers(7),
+        await registerpage.RegisterAsMember(fakeemail, generateRandomNumbers(7),
           generateRandomNumbers(5)
         );
         await registerpage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);
@@ -51,6 +55,7 @@ test.describe("MemberShip Request TestCases", () => {
         expect(membershiprequestpage.VerifyStep2TitleIsDisplayed).toBeTruthy()
         await membershiprequestpage.fillmembershipForm2('date from to.png')
         expect(landingpage.LandingpageTitleIsDisplayed).toBeTruthy()
+        console.log(fakeemail)
       
 
   })

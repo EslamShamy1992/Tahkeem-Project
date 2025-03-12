@@ -1,5 +1,6 @@
 import { Page,Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { th } from "@faker-js/faker";
 
 export class RegisterationPage extends BasePage{
 
@@ -20,6 +21,8 @@ export class RegisterationPage extends BasePage{
     private familyNameEnglish: Locator;
     private password: Locator;
     private confirmPassword: Locator;
+    private clickOnServiceSeeker:Locator;
+    private arbitration:Locator;
    
 
     constructor(page:Page){
@@ -44,11 +47,13 @@ export class RegisterationPage extends BasePage{
       this.familyNameEnglish = page.getByRole('textbox', { name: 'اسم العائلة بالأنجليزية' });
       this.password = page.getByRole('textbox', { name: 'كلمة المرور', exact: true });
       this.confirmPassword = page.getByRole('textbox', { name: 'تأكيد كلمة المرور' });
+      this.clickOnServiceSeeker= page.getByRole('heading', { name: 'طالب خدمة' });
+      this.arbitration=page.getByRole('heading', { name: 'تحكيم مؤسسي' })
        
 
     }
 
-    async RegisterAsArbitrator(Email,Phone,otp):Promise<void>{
+    async RegisterAsMember(Email,Phone,otp){
 
         await this.clickOnmember.click()
         await this.submitButton.click()
@@ -62,6 +67,22 @@ export class RegisterationPage extends BasePage{
          
 
     }
+
+    async RegisterAsServiceSeeker(Email,Phone,otp){
+
+      await this.clickOnServiceSeeker.click()
+      await this.submitButton.click()
+      await this.arbitration.click()
+      await this.submitButton.click()
+      await this.Enteremail.fill(Email)
+      await this.Enterphone.fill(Phone)
+      await this.submitButton.click()
+      await this.otpField.fill(otp)
+      await this.submitButton.click()
+       
+
+  }
+    
 
 
     async fillArabicNames(first, father, grandfather, family) {
