@@ -1,8 +1,8 @@
 import { Page,Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
-import { th } from "@faker-js/faker";
 
-export class RegisterationPage extends BasePage{
+
+export class RegistrationPage extends BasePage{
 
     private clickOnmember: Locator;
     private submitButton: Locator;

@@ -95,7 +95,7 @@ export class MemberShipRequestPage extends BasePage{
       
         
     }
-    async fillmembershipForm2(path){
+    async fillmembershipForm2MemberUser(path){
 
         await this.agreeYes.click();
         await this.generalSpecialty.fill('حقوق');
@@ -105,12 +105,31 @@ export class MemberShipRequestPage extends BasePage{
         await this.englishLanguage.click();
         await this.plusButton.click();
         await this.plusButton.click();
-        
         await this.currentJobTitle.fill('محامي');
         await this.havework.click()
         await this.currentWorkplace.fill('42 جروب');
         await this.uploadCV.setInputFiles(path);
         await this.uploadArbitrationCourse.setInputFiles(path);
+        await this.nextButton.click();
+        await this.agreementCheckbox1.check();
+        await this.agreementCheckbox2.check();
+        await this.sendButton.click();
+    }
+
+    async fillmembershipForm2ServiceSeeker(path){
+
+        await this.agreeYes.click();
+        await this.generalSpecialty.fill('حقوق');
+        await this.uploadGeneralSpecialty.setInputFiles(path);
+        await this.languagesDropdown.click();
+        await this.arabicLanguage.click();
+        await this.englishLanguage.click();
+        await this.plusButton.click();
+        await this.plusButton.click();
+        await this.currentJobTitle.fill('محامي');
+        await this.havework.click()
+        await this.currentWorkplace.fill('42 جروب');
+        await this.uploadCV.setInputFiles(path);
         await this.nextButton.click();
         await this.agreementCheckbox1.check();
         await this.agreementCheckbox2.check();
