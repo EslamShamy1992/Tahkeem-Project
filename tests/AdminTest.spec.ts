@@ -1,79 +1,71 @@
-import { expect, test } from "@playwright/test";
-import { LandingPage } from "../Pages/LandingPage";
-import { LoginPage } from "../Pages/LoginPage";
-import { HomePage } from "../Pages/HomePage";
-import { AdminPage } from "../Pages/AdminPage";
+import { expect } from "@playwright/test";
+import { test } from "./baseTest";
 import { faker } from "@faker-js/faker";
 
-let landingpage: LandingPage;
-let loginpage: LoginPage;
-let homepage: HomePage;
-let adminpage: AdminPage;
-let email = "admin@tahkeem.com";
-let password = "Changeme@123";
+test.describe("Admin Test Cases", () => {
+  let landingPage, loginPage, homePage, adminPage;
+  let adminUserName, adminPassword;
+  let adminName, adminEmail, searchAdminName, searchAdminEmail;
 
+  test.beforeEach(async ({ baseTest }) => {
+    ({ landingPage, loginPage, homePage, adminPage, adminUserName, adminPassword } = baseTest);
 
+    adminName = faker.person.firstName();
+    adminEmail = faker.internet.email();
+    searchAdminName = "elshamy";
+    searchAdminEmail = "eslameslamelshamy1992@gmail.com";
+  });
 
-test.describe("Admin TestCases", () => {
-test.beforeEach(async ({ page }) => {
-  landingpage = new LandingPage(page);
-  loginpage = new LoginPage(page);
-  homepage = new HomePage(page);
-  adminpage = new AdminPage(page);
+  test("Verify adding new admin with English name", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.addAdmin(adminName, adminEmail);
 
-  await page.goto("/");
-});
+    expect(adminPage.confirmationmessageIsDisplayed()).toBeTruthy();
+  });
 
-test("verify add new admin English name ", async ({ page }) => {
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin("admin@tahkeem.com", "Changeme@123");
-  await homepage.navigateToManageAdminPage();
-  await adminpage.addAdmin(faker.person.fullName(), faker.internet.email());
-  expect(adminpage.confirmationmessageIsDisplayed).toBeTruthy();
-});
+  test("Verify adding new admin with Arabic name", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.addAdmin("إسلام الشامي", adminEmail);
 
-test("verify add new admin Arabic name ", async ({ page }) => {
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin("admin@tahkeem.com", "Changeme@123");
-  await homepage.navigateToManageAdminPage();
-  await adminpage.addAdmin("إسلام الشامي", faker.internet.email());
-  expect(adminpage.confirmationmessageIsDisplayed).toBeTruthy();
-});
+    expect(adminPage.confirmationmessageIsDisplayed()).toBeTruthy();
+  });
 
-test("verify edit admin user", async ({ page }) => {
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin("admin@tahkeem.com", "Changeme@123");
-  await homepage.navigateToManageAdminPage();
-  await adminpage.viewLastUserDetails();
-  await adminpage.editAdmin(faker.person.fullName(), faker.internet.email());
-  expect(adminpage.confirmationmessageIsDisplayed).toBeTruthy();
-});
+  test("Verify editing admin user", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.viewLastUserDetails();
+    await adminPage.editAdmin(adminName, adminEmail);
 
-test("verify search by Admin Name", async ({ page }) => {
-  const adminName = "elshamy";
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin("admin@tahkeem.com", "Changeme@123");
-  await homepage.navigateToManageAdminPage();
-  await adminpage.searchByAdminName(adminName);
-  await adminpage.verifyEmailInResults(adminName);
-});
+    expect(adminPage.confirmationmessageIsDisplayed()).toBeTruthy();
+  });
 
-test("verify search by Admin Email", async ({ page }) => {
-  const adminEmail = "eslameslamelshamy1992@gmail.com	";
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin("admin@tahkeem.com", "Changeme@123");
-  await homepage.navigateToManageAdminPage();
-  await adminpage.searchByAdminName(adminEmail);
-  await adminpage.verifyEmailInResults(adminEmail);
-});
+  test("Verify searching by Admin Name", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.searchByAdminName(searchAdminName);
+    await adminPage.verifyEmailInResults(searchAdminName);
+  });
 
-test("verify disable admin account", async ({page}) => {
-  await landingpage.goToLoginPage();
-  await loginpage.loginAsAdmin(email, password);
-  await homepage.navigateToManageAdminPage();
-  await adminpage.disableAdminAccount();
-expect(adminpage.confirmationmessageIsDisplayed).toBeTruthy()
- 
-  
-});
+  test("Verify searching by Admin Email", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.searchByAdminEmail(searchAdminEmail);
+    await adminPage.verifyEmailInResults(searchAdminEmail);
+  });
+
+  test("Verify disabling admin account", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.loginAsAdmin(adminUserName, adminPassword);
+    await homePage.navigateToManageAdminPage();
+    await adminPage.disableAdminAccount();
+
+    expect(adminPage.confirmationmessageIsDisplayed()).toBeTruthy();
+  });
 });
