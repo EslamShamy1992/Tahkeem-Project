@@ -55,7 +55,6 @@ test.describe("Admin Test Cases", () => {
     await homePage.navigateToManageAdminPage();
     await adminPage.searchByAdminName(searchAdminNameEn);
 
-    await adminPage.page.pause()
     expect(adminPage.verifyNameEnglishInResults).toBeTruthy();
   });
 
