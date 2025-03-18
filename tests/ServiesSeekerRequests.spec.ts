@@ -34,7 +34,7 @@ test.describe("Service Seeker Test Cases", () => {
     
   });
 
-  test.only("Create Institutional Arbitration Request", async () => {
+  test("Create Institutional Arbitration Request", async () => {
     await landingPage.goToLoginPage();
     await loginPage.LoginAsServiceSeeker(serviceSeekerUserName, serviceSeekerPassword);
     await homePage.goToMyRequestsPage();
@@ -60,6 +60,38 @@ test.describe("Service Seeker Test Cases", () => {
     await serviceSeekerRequestPage.VisaPayment()
     await serviceSeekerRequestPage.SendRequestButton()
     expect(serviceSeekerRequestPage.VerifyCreatedRequestMessageIsDisplayed).toBeTruthy()
+
+
+  });
+
+
+  test("save draft Institutional Arbitration Request", async () => {
+    await landingPage.goToLoginPage();
+    await loginPage.LoginAsServiceSeeker(serviceSeekerUserName, serviceSeekerPassword);
+    await homePage.goToMyRequestsPage();
+    await serviceSeekerRequestPage.clickOncreateButton();
+    await serviceSeekerRequestPage.clickOnInstituationalArbitration();
+    await serviceSeekerRequestPage.clickOnSubmitButton();
+    await serviceSeekerRequestPage.selectIdentity1(id,generateRandomNumbers(9),path)
+    await serviceSeekerRequestPage.fillArabicNames(firstnameAr,fathernameAr,grandfathernameAr,familynameAr);
+    await serviceSeekerRequestPage.fillEnglishNames(firstNameEnglish, fatherNameEnglish,grandfatherNameEnglish,fatherNameEnglish)
+    await serviceSeekerRequestPage.fillFormSerivceSeeker1(nationality,country,city,governorate,fakeemail,phone,profession,address,postal)
+    await serviceSeekerRequestPage.NoRepresent()
+    await serviceSeekerRequestPage.NextButton()
+    await serviceSeekerRequestPage.conflictStep("تخصص","طبيعة النزاع","مبلغ 2000")
+    await serviceSeekerRequestPage.AssignArbitrators("طلب ترشيح وتعيين من قبل المركز","داخل المركز","العربية")
+    await serviceSeekerRequestPage.selectIdentity2(id,generateRandomNumbers(9),path)
+    await serviceSeekerRequestPage.fillArabicNames(firstnameAr,fathernameAr,grandfathernameAr,familynameAr);
+    await serviceSeekerRequestPage.fillEnglishNames(firstNameEnglish, fatherNameEnglish,grandfatherNameEnglish,fatherNameEnglish)
+    await serviceSeekerRequestPage.fillFormSerivceSeeker2(nationality,country,city,governorate,fakeemail,phone,profession,address,postal)
+    await serviceSeekerRequestPage.lastnextButton()
+    await serviceSeekerRequestPage.UploadArbitrationDocuments(path,path,path,path)
+    await serviceSeekerRequestPage.lastnextButton()
+    await serviceSeekerRequestPage.payment_termsandconditions("مدعي")
+    await serviceSeekerRequestPage.VisaPayment()
+    await serviceSeekerRequestPage.SaveForLaterButton()  
+    expect(serviceSeekerRequestPage.DraftIsSavedMessageIsDisplayed()).toBeTruthy()
+    await serviceSeekerRequestPage.page.pause()
 
 
   });

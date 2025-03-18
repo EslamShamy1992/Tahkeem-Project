@@ -23,6 +23,9 @@ export class AdminPage extends BasePage{
     private eyeIcon: Locator;
     private switchButton: Locator;
     private editstatusButton: Locator;
+    private nameIsdisplayed:Locator;
+    private emailIsDisplayed:Locator;
+    private nameEnglishIsDisplayed:Locator;
 
 
     
@@ -47,6 +50,9 @@ export class AdminPage extends BasePage{
         this.eyeIcon=this.enabledaccount.locator('button.ant-btn-icon-only');
         this.switchButton = page.locator('nz-switch').getByRole('button');
         this.editstatusButton = page.getByRole('button', { name: 'تعديل' });
+        this.nameIsdisplayed=page.getByRole('cell', { name: 'إسلام الشامى' });
+        this.emailIsDisplayed=page.getByRole('cell', { name: 'eslamelshamy1992@gmail.com' })
+        this.nameEnglishIsDisplayed=page.getByRole('cell', { name: 'eslam' });
         
      }
 
@@ -94,11 +100,14 @@ export class AdminPage extends BasePage{
     }
 
 
-    async verifyEmailInResults(email: string) {
-        await expect(this.resultRow(email)).toBeVisible();
+    async verifyEmailInResults() {
+        return await this.emailIsDisplayed.first().isVisible()
     }
-    async verifyNameInResults(email: string) {
-        await expect(this.resultRow(email)).toBeVisible();
+    async verifyNameArabicInResults() {
+        return await this.nameIsdisplayed.first().isVisible()
+    }
+    async verifyNameEnglishInResults() {
+        return await this.nameEnglishIsDisplayed.first().isVisible()
     }
 
 

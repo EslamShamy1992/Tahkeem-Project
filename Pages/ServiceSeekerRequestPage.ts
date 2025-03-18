@@ -55,6 +55,8 @@ export class ServiceSeekerRequestPage extends BasePage{
     private visapayment:Locator;
     private sendrequestButton:Locator;
     private requestIsCreatedMessage: Locator;
+    private saveForLaterButton:Locator;
+    private draftIssavedmessage:Locator;
 
     constructor(page:Page){
         super(page)
@@ -123,12 +125,24 @@ export class ServiceSeekerRequestPage extends BasePage{
         this.visapayment=page.getByText('فيزا / ماستركارد')
         this.sendrequestButton=page.getByRole('button', { name: 'إرسال' })
         this.requestIsCreatedMessage = page.getByRole('heading', { name: 'تم إنشاء الطلب بنجاح' }); 
+        this.saveForLaterButton=page.getByRole('button', { name: 'حفظ لوقت لاحق' });
+        this.draftIssavedmessage=page.getByRole('heading', { name: 'تم حفظ الطلب كمسودة' })
 
 
 
         
     }
 
+
+    async SaveForLaterButton(){
+
+        await this.saveForLaterButton.last().click()
+    }
+
+    async DraftIsSavedMessageIsDisplayed(){
+
+       return await this.draftIssavedmessage.isVisible()
+    }
 
 
     async VerifyCreatedRequestMessageIsDisplayed(){
@@ -164,11 +178,11 @@ export class ServiceSeekerRequestPage extends BasePage{
     async UploadArbitrationDocuments(file1,file2,file3,file4){
 
         await this.uploadArbitrationcondition.setInputFiles(file1)
-        await this.page.waitForTimeout(5000)
+        await this.page.waitForTimeout(3000)
         await this.uploadlegalRelation.setInputFiles(file2)
-        await this.page.waitForTimeout(5000)
+        await this.page.waitForTimeout(3000)
         await this.uploadContract.setInputFiles(file3)
-        await this.page.waitForTimeout(5000)
+        await this.page.waitForTimeout(3000)
         await this.uploadagencydocument.setInputFiles(file4)
 
     }
