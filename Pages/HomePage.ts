@@ -17,7 +17,7 @@ export class HomePage extends BasePage{
 
         this.logo=page.getByRole('link', { name: 'TAHKEEM' })
         this.manageadminbutton= page.getByText('إدارة المشرفين');
-        this.profileMenu = page.locator('div').filter({ hasText: /^lightDarkauto العربية العربيةالأنجليزية$/ }).locator('nz-avatar');
+        this.profileMenu = page.getByRole('img', { name: 'User Avatar' })
         this.myRequests = page.getByRole('menuitem', { name: 'طلباتي' });
        
 
@@ -25,7 +25,7 @@ export class HomePage extends BasePage{
 
     async goToMyRequestsPage(){
 
-        await this.profileMenu.click();
+        await this.profileMenu.first().click();
         await this.myRequests.click();
 
 

@@ -46,7 +46,7 @@ export class BaseTest {
 
     // Admin Credentials
     this.adminUserName = "admin@tahkeem.com";
-    this.adminPassword = "Changeme@123";
+    this.adminPassword = "Changeme@1234";
     this.adminEmail = "admin@example.com";
 
     // Service Seeker Credentials

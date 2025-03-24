@@ -21,7 +21,8 @@ let country,nationality,address,postal;
   });
   
 
-  test("Submit MemberShip Application Form member user", async () => {
+  test.only("Submit MemberShip Application Form member user", async () => {
+    await landingPage.page.pause()
     await landingPage.goToRegisterPage();
     await registerPage.RegisterAsMember(fakeemail, generateRandomNumbers(7), generateRandomNumbers(5));
     await registerPage.fillArabicNames(firstnameAr, fathernameAr, grandfathernameAr, familynameAr);

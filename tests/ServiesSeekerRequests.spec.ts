@@ -35,6 +35,7 @@ test.describe("Service Seeker Test Cases", () => {
   });
 
   test("Create Institutional Arbitration Request", async () => {
+    await serviceSeekerRequestPage.page.pause()
     await landingPage.goToLoginPage();
     await loginPage.LoginAsServiceSeeker(serviceSeekerUserName, serviceSeekerPassword);
     await homePage.goToMyRequestsPage();
@@ -44,7 +45,7 @@ test.describe("Service Seeker Test Cases", () => {
     await serviceSeekerRequestPage.selectIdentity1(id,generateRandomNumbers(9),path)
     await serviceSeekerRequestPage.fillArabicNames(firstnameAr,fathernameAr,grandfathernameAr,familynameAr);
     await serviceSeekerRequestPage.fillEnglishNames(firstNameEnglish, fatherNameEnglish,grandfatherNameEnglish,fatherNameEnglish)
-    await serviceSeekerRequestPage.fillFormSerivceSeeker1(nationality,country,city,governorate,fakeemail,phone,profession,address,postal)
+    await serviceSeekerRequestPage.fillFormSerivceSeeker1(nationality,country,city,governorate,"jaxev95468@amgens.com",phone,profession,address,postal)
     await serviceSeekerRequestPage.NoRepresent()
     await serviceSeekerRequestPage.NextButton()
     await serviceSeekerRequestPage.conflictStep("تخصص","طبيعة النزاع","مبلغ 2000")
@@ -52,20 +53,25 @@ test.describe("Service Seeker Test Cases", () => {
     await serviceSeekerRequestPage.selectIdentity2(id,generateRandomNumbers(9),path)
     await serviceSeekerRequestPage.fillArabicNames(firstnameAr,fathernameAr,grandfathernameAr,familynameAr);
     await serviceSeekerRequestPage.fillEnglishNames(firstNameEnglish, fatherNameEnglish,grandfatherNameEnglish,fatherNameEnglish)
-    await serviceSeekerRequestPage.fillFormSerivceSeeker2(nationality,country,city,governorate,fakeemail,phone,profession,address,postal)
+    await serviceSeekerRequestPage.fillFormSerivceSeeker2(nationality,country,city,governorate,"vacevo1688@boyaga.com",phone,profession,address,postal)
     await serviceSeekerRequestPage.lastnextButton()
     await serviceSeekerRequestPage.UploadArbitrationDocuments(path,path,path,path)
     await serviceSeekerRequestPage.lastnextButton()
     await serviceSeekerRequestPage.payment_termsandconditions("مدعي")
-    await serviceSeekerRequestPage.VisaPayment()
+    // await serviceSeekerRequestPage.VisaPayment()
+    // await serviceSeekerRequestPage.BankTransferPayment(path)
+    await serviceSeekerRequestPage.MadaPayment()
     await serviceSeekerRequestPage.SendRequestButton()
     expect(serviceSeekerRequestPage.VerifyCreatedRequestMessageIsDisplayed).toBeTruthy()
+   await serviceSeekerRequestPage.page.pause()
 
 
   });
 
 
   test("save draft Institutional Arbitration Request", async () => {
+
+    await landingPage.page.pause()
     await landingPage.goToLoginPage();
     await loginPage.LoginAsServiceSeeker(serviceSeekerUserName, serviceSeekerPassword);
     await homePage.goToMyRequestsPage();
@@ -91,7 +97,6 @@ test.describe("Service Seeker Test Cases", () => {
     await serviceSeekerRequestPage.VisaPayment()
     await serviceSeekerRequestPage.SaveForLaterButton()  
     expect(serviceSeekerRequestPage.DraftIsSavedMessageIsDisplayed()).toBeTruthy()
-    await serviceSeekerRequestPage.page.pause()
 
 
   });

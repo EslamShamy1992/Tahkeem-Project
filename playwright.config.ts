@@ -35,7 +35,7 @@ export default defineConfig({
     headless:false,
     
     /* Base URL to use in actions like `await page.goto('/')`. */
-       baseURL: 'https://tahkeem.dev.is.sa',
+       baseURL: 'https://tahkeem.acci.dev.is.sa',
       // storageState: 'storageState.json',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
