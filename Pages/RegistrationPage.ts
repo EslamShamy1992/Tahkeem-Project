@@ -68,6 +68,7 @@ export class RegistrationPage extends BasePage{
 
     }
 
+    
     async RegisterAsServiceSeeker(Email,Phone,otp){
 
       await this.clickOnServiceSeeker.click()

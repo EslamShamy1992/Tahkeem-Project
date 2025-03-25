@@ -45,7 +45,7 @@ test.describe("Service Seeker Test Cases", () => {
     await serviceSeekerRequestPage.selectIdentity1(id,generateRandomNumbers(9),path)
     await serviceSeekerRequestPage.fillArabicNames(firstnameAr,fathernameAr,grandfathernameAr,familynameAr);
     await serviceSeekerRequestPage.fillEnglishNames(firstNameEnglish, fatherNameEnglish,grandfatherNameEnglish,fatherNameEnglish)
-    await serviceSeekerRequestPage.fillFormSerivceSeeker1(nationality,country,city,governorate,"jaxev95468@amgens.com",phone,profession,address,postal)
+    await serviceSeekerRequestPage.fillFormSerivceSeeker1(nationality,country,city,governorate,"togac78466@hikuhu.com",phone,profession,address,postal)
     await serviceSeekerRequestPage.NoRepresent()
     await serviceSeekerRequestPage.NextButton()
     await serviceSeekerRequestPage.conflictStep("تخصص","طبيعة النزاع","مبلغ 2000")
